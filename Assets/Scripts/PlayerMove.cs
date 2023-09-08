@@ -29,8 +29,8 @@ public class PlayerMove : MonoBehaviour
     {
         // 사용자의 입력에 따라 전후좌우로 이동하고 싶다.
         // 1. 사용자의 입력을 받는다.
-        float h = ARAVRInput.GetAxis("Horizontal");
-        float v = ARAVRInput.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
         // 2. 방향을 만든다.
         Vector3 dir = new Vector3(h, 0, v);
         // 2.0 사용자가 바라보는 방향으로 입력 값 변화시키기
@@ -46,7 +46,7 @@ public class PlayerMove : MonoBehaviour
             yVelocity = 0;
         }
         // 2.3 사용자가 점프 버튼을 누르면 속도에 점프 크기를 할당한다.
-        if (ARAVRInput.GetDown(ARAVRInput.Button.Two, ARAVRInput.Controller.RTouch))
+        if (Input.GetButtonDown("Jump"))
         {
             yVelocity = jumpPower;
         }
@@ -63,6 +63,7 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
     }
+
     public void DamageAction(int damage)
     {
         hp -= damage;
